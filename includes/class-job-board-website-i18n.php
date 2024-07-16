@@ -24,24 +24,20 @@
  * @subpackage Job_Board_Website/includes
  * @author     Michaelangelo Mamaclay <mamaclaymichael20@gmail.com>
  */
-class Job_Board_Website_i18n {
-
-
+class Job_Board_Website_i18n
+{
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+     * @return void
 	 */
-	public function load_plugin_textdomain() {
-
+	public function load_plugin_textdomain(): void
+    {
 		load_plugin_textdomain(
 			'job-board-website',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
-
 	}
-
-
-
 }

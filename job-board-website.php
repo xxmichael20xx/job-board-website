@@ -42,7 +42,8 @@ define( 'JOB_BOARD_WEBSITE_VERSION', '1.0.0' );
  * The code that runs during plugin activation.
  * This action is documented in includes/class-job-board-website-activator.php
  */
-function activate_job_board_website() {
+function activate_job_board_website(): void
+{
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-job-board-website-activator.php';
 	Job_Board_Website_Activator::activate();
 }
@@ -51,7 +52,8 @@ function activate_job_board_website() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-job-board-website-deactivator.php
  */
-function deactivate_job_board_website() {
+function deactivate_job_board_website(): void
+{
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-job-board-website-deactivator.php';
 	Job_Board_Website_Deactivator::deactivate();
 }
@@ -74,10 +76,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-job-board-website.php';
  *
  * @since    1.0.0
  */
-function run_job_board_website() {
-
+function run_job_board_website(): void
+{
 	$plugin = new Job_Board_Website();
 	$plugin->run();
-
 }
 run_job_board_website();

@@ -20,17 +20,16 @@
  * @subpackage Job_Board_Website/includes
  * @author     Michaelangelo Mamaclay <mamaclaymichael20@gmail.com>
  */
-class Job_Board_Website_Deactivator {
-
-	/**
-	 * Short Description. (use period)
+class Job_Board_Website_Deactivator
+{
+    /**
+	 * Method to execute when the plugin is deactivated.
 	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+     * @return void
 	 */
-	public static function deactivate() {
-
+	public static function deactivate(): void
+    {
+        //
 	}
-
 }

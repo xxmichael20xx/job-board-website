@@ -27,35 +27,35 @@
  * @subpackage Job_Board_Website/includes
  * @author     Michaelangelo Mamaclay <mamaclaymichael20@gmail.com>
  */
-class Job_Board_Website {
-
+class Job_Board_Website
+{
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Job_Board_Website_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @since 1.0.0
+	 * @access protected
+	 * @var Job_Board_Website_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
-	protected $loader;
+	protected Job_Board_Website_Loader $loader;
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @since 1.0.0
+	 * @access protected
+	 * @var string $plugin_name The string used to uniquely identify this plugin.
 	 */
-	protected $plugin_name;
+	protected string $plugin_name;
 
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @since 1.0.0
+	 * @access protected
+	 * @var string $version The current version of the plugin.
 	 */
-	protected $version;
+	protected string $version;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -66,7 +66,8 @@ class Job_Board_Website {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct()
+    {
 		if ( defined( 'JOB_BOARD_WEBSITE_VERSION' ) ) {
 			$this->version = JOB_BOARD_WEBSITE_VERSION;
 		} else {
@@ -78,7 +79,6 @@ class Job_Board_Website {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -94,11 +94,12 @@ class Job_Board_Website {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since 1.0.0
+	 * @access private
+     * @return void
 	 */
-	private function load_dependencies() {
-
+	private function load_dependencies(): void
+    {
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -110,6 +111,11 @@ class Job_Board_Website {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-job-board-website-i18n.php';
+
+        /**
+         * The file responsible for helper functions of the plugin.
+         */
+        require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/helpers.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -123,7 +129,6 @@ class Job_Board_Website {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-job-board-website-public.php';
 
 		$this->loader = new Job_Board_Website_Loader();
-
 	}
 
 	/**
@@ -132,55 +137,57 @@ class Job_Board_Website {
 	 * Uses the Job_Board_Website_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since 1.0.0
+	 * @access private
+     * @return void
 	 */
-	private function set_locale() {
-
+	private function set_locale(): void
+    {
 		$plugin_i18n = new Job_Board_Website_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
+	 * Register all the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since 1.0.0
+	 * @access private
+     * @return void
 	 */
-	private function define_admin_hooks() {
-
+	private function define_admin_hooks(): void
+    {
 		$plugin_admin = new Job_Board_Website_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing functionality
+	 * Register all the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since 1.0.0
+	 * @access private
+     * @return void
 	 */
-	private function define_public_hooks() {
-
+	private function define_public_hooks(): void
+    {
 		$plugin_public = new Job_Board_Website_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
+	 * Run the loader to execute all the hooks with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+     * @return void
 	 */
-	public function run() {
+	public function run(): void
+    {
 		$this->loader->run();
 	}
 
@@ -188,31 +195,33 @@ class Job_Board_Website {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
-	 * @return    string    The name of the plugin.
+	 * @since 1.0.0
+	 * @return string The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name(): string
+    {
 		return $this->plugin_name;
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
-	 * @return    Job_Board_Website_Loader    Orchestrates the hooks of the plugin.
+	 * @since 1.0.0
+	 * @return Job_Board_Website_Loader Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader(): Job_Board_Website_Loader
+    {
 		return $this->loader;
 	}
 
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @since 1.0.0
+	 * @return string The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version(): string
+    {
 		return $this->version;
 	}
-
 }

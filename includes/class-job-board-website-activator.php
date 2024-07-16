@@ -20,17 +20,16 @@
  * @subpackage Job_Board_Website/includes
  * @author     Michaelangelo Mamaclay <mamaclaymichael20@gmail.com>
  */
-class Job_Board_Website_Activator {
-
+class Job_Board_Website_Activator
+{
 	/**
-	 * Short Description. (use period)
+	 * Method to execute when the plugin is activated.
 	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+     * @return void
 	 */
-	public static function activate() {
-
+	public static function activate(): void
+    {
+        //
 	}
-
 }
