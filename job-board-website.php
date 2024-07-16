@@ -58,14 +58,26 @@ function deactivate_job_board_website(): void
 	Job_Board_Website_Deactivator::deactivate();
 }
 
+function uninstall_job_board_website(): void
+{
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-job-board-website-uninstaller.php';
+    Job_Board_Website_Uninstaller::uninstall();
+}
+
 register_activation_hook( __FILE__, 'activate_job_board_website' );
 register_deactivation_hook( __FILE__, 'deactivate_job_board_website' );
+register_uninstall_hook( __FILE__, 'uninstall_job_board_website' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-job-board-website.php';
+
+/**
+ * The file that contains the constants variables for the plugin.
+ */
+require plugin_dir_path( __FILE__ ) . 'constants.php' ;
 
 /**
  * Begins execution of the plugin.
