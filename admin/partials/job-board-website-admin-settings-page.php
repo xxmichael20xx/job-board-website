@@ -1,1 +1,1 @@
-<h1>Job Board Website - Settings</h1>
+<h1 class="text-2xl">Job Board Website - Settings</h1>

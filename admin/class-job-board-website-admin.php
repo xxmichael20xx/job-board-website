@@ -78,7 +78,14 @@ class Job_Board_Website_Admin
             plugin_dir_url( __FILE__ ) . 'css/job-board-website-admin.css',
             array(),
             $this->version,
-            'all'
+        );
+
+		// Enqueue the compiled tailwind css file
+		wp_enqueue_style(
+            'jbw-main-css',
+			JBW_PLUGIN_DIR . 'build/css/jbw-main.css',
+            array(),
+            $this->version,
         );
 	}
 

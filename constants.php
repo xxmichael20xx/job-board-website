@@ -13,5 +13,5 @@ if ( ! defined( 'JBW_TABLE_SETTINGS' ) ) {
 }
 
 if ( ! defined( 'JBW_PLUGIN_DIR' ) ) {
-	define( 'JBW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'JBW_PLUGIN_DIR', plugin_dir_url( __FILE__ ) );
 }
