@@ -110,4 +110,52 @@ class Job_Board_Website_Admin
             false
         );
 	}
+
+	/**
+	 * Define the admin dashboard settings page.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function define_settings_page(): void
+	{
+		$settingsPage = add_menu_page(
+			'JBW - Settings',
+			'JBW - Settings',
+			'manage_options',
+			'jbw-settings',
+			array( $this, 'settings_page_display' ),
+			'dashicons-admin-generic',
+		);
+
+		add_action( 'load-' . $settingsPage, array( $this, 'settings_page_enqueue' ) );
+	}
+
+	/**
+	 * Define the settings page display.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function settings_page_display(): void
+	{
+		require_once plugin_dir_path( __FILE__ ) . 'partials/job-board-website-admin-settings-page.php';
+	}
+
+	/**
+	 * Enqueue the script for the settings page.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function settings_page_enqueue(): void
+	{
+		wp_enqueue_script(
+			'jbw-settings-page-script',
+			plugin_dir_url( __FILE__ ) . 'js/job-board-website-settings-page-script.js',
+			array( 'jquery' ),
+			null,
+			true
+		);
+	}
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Fired during plugin uninstall
+ * Fired during plugin uninstallation
  *
  * @link       https://N/A
  * @since      1.0.0
@@ -11,9 +11,9 @@
  */
 
 /**
- * Fired during plugin uninstall.
+ * Fired during plugin uninstallation.
  *
- * This class defines all code necessary to run during the plugin's uninstall.
+ * This class defines all code necessary to run during the plugin's uninstallation.
  *
  * @since      1.0.0
  * @package    Job_Board_Website

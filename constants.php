@@ -11,3 +11,7 @@ if ( ! defined( 'JBW_TABLE_PREFIX' ) ) {
 if ( ! defined( 'JBW_TABLE_SETTINGS' ) ) {
     define( 'JBW_TABLE_SETTINGS', JBW_TABLE_PREFIX . 'settings' );
 }
+
+if ( ! defined( 'JBW_PLUGIN_DIR' ) ) {
+	define( 'JBW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}

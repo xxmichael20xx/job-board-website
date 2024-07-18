@@ -15,8 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Job Board Website
  * Plugin URI:        https://N/A
- * Description:       A simple application for job board / posting for Employers. The application uses Filament for easy use on panel
-and handles API requests for any platforms to use.
+ * Description:       A simple application for job board / posting for Employers. The application consumes an external API for the jobs data.
  * Version:           1.0.0
  * Author:            Michaelangelo Mamaclay
  * Author URI:        https://N/A/
