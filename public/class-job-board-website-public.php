@@ -43,9 +43,9 @@ class Job_Board_Website_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @since 1.0.0
 	 * @param string $plugin_name The name of the plugin.
 	 * @param string $version The version of this plugin.
-	 * @since 1.0.0
 	 */
 	public function __construct(string $plugin_name, string $version)
     {
@@ -57,6 +57,7 @@ class Job_Board_Website_Public {
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public function enqueue_styles(): void
@@ -80,6 +81,7 @@ class Job_Board_Website_Public {
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public function enqueue_scripts(): void

@@ -43,11 +43,11 @@ class Job_Board_Website_Admin
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @since 1.0.0
 	 * @param string $plugin_name The name of this plugin.
 	 * @param string $version The version of this plugin.
-	 * @since 1.0.0
 	 */
-	public function __construct(string $plugin_name, string $version)
+	public function __construct( string $plugin_name, string $version )
     {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -57,6 +57,7 @@ class Job_Board_Website_Admin
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public function enqueue_styles(): void
@@ -87,12 +88,19 @@ class Job_Board_Website_Admin
             array(),
             $this->version,
         );
+
+		// Enqueue SweetAlert2 CDN
+	    wp_enqueue_script(
+			'sweetalert2-cdn-script',
+		    'https://cdn.jsdelivr.net/npm/sweetalert2@11'
+	    );
 	}
 
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public function enqueue_scripts(): void
@@ -122,6 +130,7 @@ class Job_Board_Website_Admin
 	 * Define the admin dashboard settings page.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public function define_settings_page(): void
@@ -142,6 +151,7 @@ class Job_Board_Website_Admin
 	 * Define the settings page display.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public function settings_page_display(): void
@@ -153,6 +163,7 @@ class Job_Board_Website_Admin
 	 * Enqueue the script for the settings page.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return void
 	 */
 	public function settings_page_enqueue(): void
@@ -161,8 +172,16 @@ class Job_Board_Website_Admin
 			'jbw-settings-page-script',
 			plugin_dir_url( __FILE__ ) . 'js/job-board-website-settings-page-script.js',
 			array( 'jquery' ),
-			null,
+			$this->version,
 			true
+		);
+
+		wp_localize_script(
+			'jbw-settings-page-script',
+			'jbwSettingsPageScript',
+			[
+				'ajaxUrl' => admin_url( 'admin-ajax.php' )
+			]
 		);
 	}
 }

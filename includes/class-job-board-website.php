@@ -64,7 +64,7 @@ class Job_Board_Website
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function __construct()
     {
@@ -96,6 +96,7 @@ class Job_Board_Website
 	 *
 	 * @since 1.0.0
 	 * @access private
+	 *
      * @return void
 	 */
 	private function load_dependencies(): void
@@ -117,10 +118,25 @@ class Job_Board_Website
          */
         require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/helpers.php';
 
+	    /**
+	     * The file responsible for the API Client.
+	     */
+        require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/class-job-board-website-api-client.php';
+
+	    /**
+	     * The file responsible for the API Service.
+	     */
+	    require_once plugin_dir_path( dirname( __FILE__) ) . 'includes/class-job-board-website-api-service.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-job-board-website-admin.php';
+
+	    /**
+	     * This class responsible for defining all ajax actions that occur in the admin area.
+	     */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-job-board-website-ajax-hooks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -128,7 +144,14 @@ class Job_Board_Website
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-job-board-website-public.php';
 
-		$this->loader = new Job_Board_Website_Loader();
+	    /**
+	     * The class responsible for defining Table Models.
+	     */
+	    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-job-board-website-model-loader.php';
+	    $job_board_website_model_loader = new Job_Board_Website_Model_Loader();
+	    $job_board_website_model_loader::setup_models();
+
+	    $this->loader = new Job_Board_Website_Loader();
 	}
 
 	/**
@@ -139,6 +162,7 @@ class Job_Board_Website
 	 *
 	 * @since 1.0.0
 	 * @access private
+	 *
      * @return void
 	 */
 	private function set_locale(): void
@@ -154,16 +178,27 @@ class Job_Board_Website
 	 *
 	 * @since 1.0.0
 	 * @access private
+	 *
      * @return void
 	 */
 	private function define_admin_hooks(): void
     {
 		$plugin_admin = new Job_Board_Website_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin_ajax_hooks = new Job_Board_Website_Ajax_Hooks( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'define_settings_page' );
+
+		// Load the ajax hooks
+	    foreach ( $plugin_admin_ajax_hooks::defineAjaxHooks() as $define_ajax_hook ) {
+			$this->loader->add_action(
+				'wp_ajax_' . $define_ajax_hook,
+				$plugin_admin_ajax_hooks,
+				$define_ajax_hook
+			);
+	    }
 	}
 
 	/**
@@ -172,6 +207,7 @@ class Job_Board_Website
 	 *
 	 * @since 1.0.0
 	 * @access private
+	 *
      * @return void
 	 */
 	private function define_public_hooks(): void
@@ -186,6 +222,7 @@ class Job_Board_Website
 	 * Run the loader to execute all the hooks with WordPress.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public function run(): void
@@ -198,6 +235,7 @@ class Job_Board_Website
 	 * WordPress and to define internationalization functionality.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return string The name of the plugin.
 	 */
 	public function get_plugin_name(): string
@@ -209,6 +247,7 @@ class Job_Board_Website
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return Job_Board_Website_Loader Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader(): Job_Board_Website_Loader
@@ -220,6 +259,7 @@ class Job_Board_Website
 	 * Retrieve the version number of the plugin.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @return string The version number of the plugin.
 	 */
 	public function get_version(): string

@@ -26,6 +26,7 @@ class Job_Board_Website_Uninstaller
      * Method to execute when the plugin is uninstalled.
      *
      * @since 1.0.0
+     *
      * @return void
      */
     public static function uninstall(): void
@@ -36,6 +37,7 @@ class Job_Board_Website_Uninstaller
     /**
      * Drop plugin tables.
      *
+     * @since 1.0.0
      * @return void
      */
     protected static function dropTables(): void

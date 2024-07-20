@@ -4,7 +4,7 @@
  * The plugin bootstrap file
  *
  * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
+ * admin area. This file also includes all the dependencies used by the plugin,
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Job Board Website
  * Plugin URI:        https://N/A
- * Description:       A simple application for job board / posting for Employers. The application consumes an external API for the jobs data.
+ * Description:       A simple application for job board / posting for Employers. The application consumes an external API for the jobs' data.
  * Version:           1.0.0
  * Author:            Michaelangelo Mamaclay
  * Author URI:        https://N/A/
@@ -36,6 +36,8 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'JOB_BOARD_WEBSITE_VERSION', '1.0.0' );
+
+require_once plugin_dir_path( __FILE__ )  . 'vendor/autoload.php';
 
 /**
  * The code that runs during plugin activation.
@@ -85,7 +87,7 @@ require plugin_dir_path( __FILE__ ) . 'constants.php' ;
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since 1.0.0
  */
 function run_job_board_website(): void
 {

@@ -26,6 +26,7 @@ class Job_Board_Website_Deactivator
 	 * Method to execute when the plugin is deactivated.
 	 *
 	 * @since 1.0.0
+     *
      * @return void
 	 */
 	public static function deactivate(): void

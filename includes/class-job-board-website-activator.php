@@ -26,6 +26,7 @@ class Job_Board_Website_Activator
 	 * Method to execute when the plugin is activated.
 	 *
 	 * @since 1.0.0
+	 *
      * @return void
 	 */
 	public static function activate(): void
@@ -35,6 +36,8 @@ class Job_Board_Website_Activator
 
     /**
      * Set up the tables needed by the plugin.
+     *
+     * @since 1.0.0
      *
      * @return void
      */
@@ -66,6 +69,8 @@ class Job_Board_Website_Activator
     /**
      * Set up the table columns.
      *
+     * @since 1.0.0
+     *
      * @return array<string>
      */
     protected static function settings_table(): array
@@ -73,7 +78,7 @@ class Job_Board_Website_Activator
         return [
             JBW_TABLE_SETTINGS,
             '`id` MEDIUMINT(11) NOT NULL AUTO_INCREMENT,
-            `username` VARCHAR(255) NOT NULL,
+            `email` VARCHAR(255) NOT NULL,
             `password` VARCHAR(255) NOT NULL,
             `_token` VARCHAR(255) NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
